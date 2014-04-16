@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action="/")
+  ul#sortable
+    each item, index in items
+      li.ui-state-default(data-item="#{index}")
+        span
+        | #{item}
+  .dragarea
+    #draggable(style="top:#{draggable.top};left:#{draggable.left};") Drag Me!

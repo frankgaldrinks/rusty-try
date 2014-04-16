@@ -1,0 +1,51 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#sortable { 
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0; 
+  width: 400px;
+}
+
+#sortable li { 
+  border-radius: 3px;
+  background-color: #DDD;
+  border: 1px solid #555;
+  margin: 0 3px 3px 3px; 
+  padding: 0.4em; 
+  /*padding-left: 1.5em; */
+  font-size: 1.4em; 
+  cursor: move;
+  /*height: 18px; */
+}
+
+#sortable li span { 
+  /*position: absolute; 
+  margin-left: -1.3em; */
+  color: orange;
+}
+
+#draggable {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  padding: 15px;
+  z-index: 5;
+  background-color: #80E6FF;
+}
+
+.dragarea {
+  position: relative;
+}
+
+#draggable {
+  position: relative;
+  cursor: move;
+}

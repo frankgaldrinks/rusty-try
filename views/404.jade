@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  -var refreshTime = 10;
+  p You are at the 
+    strong WRONG PAGE - 404
+  meta(id="redirect" http-equiv="refresh" content="#{refreshTime + 1}; url=/")
+  p. 
+    <a href="/">Click here</a> to redirect
+    or wait <span id=timer>#{refreshTime}</span> seconds
+  script(src="/javascripts/timer.js")
