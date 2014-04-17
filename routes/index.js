@@ -1,7 +1,8 @@
-var indexController = require('../controllers/index');
+module.exports = function(app,db){
+  var indexController = require('../controllers/index')(db);
 
-module.exports = function(app){
   app.get('/', indexController.index);
   app.get('/redirect', indexController.redirect);
+  app.get('/place/:uuid', indexController.uuid);
   // app.post('/sort', indexController.sort);
 };
