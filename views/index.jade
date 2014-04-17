@@ -3,9 +3,9 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  div
+  form(type="post" role="form" id="submitnew")
     input.form-control(type="text" name="newitem" id="newitem")
-    button.btn.btn-success#newbutt Create
+    input(type="submit" class="btn btn-success" value="Create")
   ul#sortable
     each item, index in items
       li.ui-state-default.item(data-item="#{index}")

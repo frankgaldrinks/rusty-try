@@ -60,8 +60,17 @@ $(document).ready(function () {
     socket.emit("removeitem", {item: $(this).parent().text()});
   });
 
-  $("#newbutt").on("click", function () {
-    var newItem = $(this).parent().find("input").val();
+  // $("#newbutt").on("click", function () {
+  //   var newItem = $(this).parent().find("input").val();
+  //   $(this).parent().find("input").val("");
+  //   console.log(newItem);
+  //   socket.emit("newitem", {newItem: newItem});
+  // });
+
+  $('#submitnew').submit(function(event) {
+    event.preventDefault();
+    var newItem = $(this).parent().find("#newitem").val();
+    $(this).parent().find("#newitem").val("");
     console.log(newItem);
     socket.emit("newitem", {newItem: newItem});
   });
