@@ -6,6 +6,13 @@ $(document).ready(function () {
 
   var socket = io.connect('http://192.168.1.9');
 
+  socket.on('connect', function () {
+    console.log("Connected to the socket");
+    socket.emit('enterroom', $("ul").data("uuid"), function (response) {
+
+    });
+  });
+
   socket.on('changeorderclients', function (data) {
     $sortable.html("");
     var newItems = "";
@@ -72,6 +79,10 @@ $(document).ready(function () {
     var newItem = $(this).parent().find("#newitem").val();
     $(this).parent().find("#newitem").val("");
     console.log(newItem);
-    socket.emit("newitem", {newItem: newItem});
+    socket.emit("newitem", {newItem: newItem}, function (response) {
+      if (response) {
+        console.log(response);
+      }
+    });
   });
 });

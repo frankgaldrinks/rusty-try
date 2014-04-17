@@ -1,16 +1,18 @@
 var _ = require("underscore");
 // global.items = [0,1,2,3,4,5,6];
-// global.items = ["Apricot","Banana","Cranberry","Date","Elderberry","Fig","Grape"];
-// global.draggable = {
-//   top: "0px",
-//   left: "0px"
-// };
+//global.items = ["Apricot","Banana","Cranberry","Date","Elderberry","Fig","Grape"];
+defaultitems = ["Create More!"];
+defaultdraggable = {
+  top: "0px",
+  left: "0px"
+};
 
 module.exports = function (db) {
   functions = {};
+  var $data = db.collection('data');
 
   functions.index = function (req, res) {
-    db.collection('data').findOne({}, function (err, doc) {
+    $data.findOne({}, function (err, doc) {
       if (err) throw err;
       console.dir(doc);
       res.render('index', {items: doc.items, draggable: doc.draggable});
@@ -22,7 +24,21 @@ module.exports = function (db) {
   };
 
   functions.uuid = function (req, res) {
-    res.render('uuid', {nothing: "nothing"});
+    var uuid = req.params.uuid;
+    $data.count({name: uuid}, function (err, result) {
+      if (result > 0) {
+        $data.findOne({name: uuid}, function (err, doc) {
+          if (err) throw err;
+          res.render('uuid', {uuid: uuid, items: doc.items, draggable: doc.draggable});
+        });
+      } else {
+        $data.insert({name: uuid, items: defaultitems, draggable: defaultdraggable}, function(err, inserted) {
+          if (err) throw err;
+          res.render('uuid', {uuid: uuid, items: defaultitems, draggable: defaultdraggable});
+        });
+      }
+    });
+    
   };
 
   return functions;
