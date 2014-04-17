@@ -11,8 +11,7 @@ block content
       ul#sortable(data-uuid=uuid)
         each item, index in items
           li.ui-state-default.item(data-item="#{index}")
-            span
-            | #{item}
+            span.itemtext #{item}
             span.removeitem.glyphicon.glyphicon-remove
       .dragarea
         #draggable(style="top:#{draggable.top};left:#{draggable.left};") Drag Me!

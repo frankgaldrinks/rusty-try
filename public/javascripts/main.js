@@ -19,8 +19,7 @@ $(document).ready(function () {
     console.log(data.serial);
     for (var i = 0; i < data.serial.length; i++) {
       newItems += "<li data-item='" + i + "' class='ui-state-default item'>"
-      newItems += "<span></span>"
-      newItems += data.serial[i];
+      newItems += "<span class='itemtext'>" + data.serial[i] + "</span>";
       newItems += "<span class='removeitem glyphicon glyphicon-remove'></span></li>";
     }
     $sortable.append(newItems);
