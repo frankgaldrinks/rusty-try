@@ -9,10 +9,12 @@ $(document).ready(function () {
   socket.on('changeorderclients', function (data) {
     $sortable.html("");
     var newItems = "";
+    console.log(data.serial);
     for (var i = 0; i < data.serial.length; i++) {
-      newItems += "<li data-item='" + i + "' class='ui-state-default'>"
+      newItems += "<li data-item='" + i + "' class='ui-state-default item'>"
       newItems += "<span></span>"
-      newItems += data.serial[i] + "</li>";
+      newItems += data.serial[i];
+      newItems += "<span class='removeitem glyphicon glyphicon-remove'></span></li>";
     }
     $sortable.append(newItems);
   });
@@ -50,5 +52,17 @@ $(document).ready(function () {
     drag: function( event, ui ) {
       socket.emit('changedrag', {dragdata: ui.position})
     }
+  });
+
+  //VANILLA JQUERY STUFF ----------------->
+  $(document).on("click", ".removeitem", function () {
+    console.log($(this).parent().text());
+    socket.emit("removeitem", {item: $(this).parent().text()});
+  });
+
+  $("#newbutt").on("click", function () {
+    var newItem = $(this).parent().find("input").val();
+    console.log(newItem);
+    socket.emit("newitem", {newItem: newItem});
   });
 });

@@ -49,3 +49,25 @@ a {
   position: relative;
   cursor: move;
 }
+
+.item {
+  position: relative;
+}
+
+.removeitem {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: red;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  width: 323px;
+  margin: 5px 0;
+  display: inline-block;
+}
+
+#newbutt {
+  display: inline-block;
+}

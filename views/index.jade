@@ -3,11 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  form(action="/")
+  div
+    input.form-control(type="text" name="newitem" id="newitem")
+    button.btn.btn-success#newbutt Create
   ul#sortable
     each item, index in items
-      li.ui-state-default(data-item="#{index}")
+      li.ui-state-default.item(data-item="#{index}")
         span
         | #{item}
+        span.removeitem.glyphicon.glyphicon-remove
   .dragarea
     #draggable(style="top:#{draggable.top};left:#{draggable.left};") Drag Me!
