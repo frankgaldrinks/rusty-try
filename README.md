@@ -1,1 +1,1 @@
-**A plat app with jqueryui sortable, express, and socket.io
+A play app with jqueryui sortable, express, and socket.io

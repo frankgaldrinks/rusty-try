@@ -25,7 +25,7 @@ app.use(function (req, res) {
 })
 
 app.locals.pretty = true;
-app.locals.title = "rusty api";
+app.locals.title = "Jquery UI Socket Test";
 
 // development only
 if ('development' == app.get('env')) {
