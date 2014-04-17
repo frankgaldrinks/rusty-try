@@ -3,6 +3,11 @@ extends layout
 block content
   .row
     .col-lg-4
-      h1 Welcome to the homepage
-      p Direction: Enter in a unique url /place/:name
+      h2 Welcome to the jquery ui socket.io play app
+      p Direction: Enter in a unique url /place/:name or enter it below
+      form(action="/createroom" method="post" role="form" id="submitnew")
+        .form-group.ingroup
+          input.form-control(type="text" name="room" id="room")
+          input(type="submit" class="btn btn-success newroom" value="Go To")
       
+block localjs

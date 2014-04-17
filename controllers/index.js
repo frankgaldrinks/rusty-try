@@ -38,7 +38,10 @@ module.exports = function (db) {
         });
       }
     });
-    
+  };
+
+  functions.createroom = function (req, res) {
+    res.redirect('/place/' + req.body.room);
   };
 
   return functions;

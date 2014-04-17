@@ -9,12 +9,13 @@ html
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     //- link(rel='stylesheet' href='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.min.css')
+  body
+    block content
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js')
     script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js')
     script(src="/javascripts/jquery.ui.touch-punch.min.js")
     script(src="/socket.io/socket.io.js")
-  body
-    block content
-    script(src='/javascripts/main.js')
+    block localjs
+        script(src='/javascripts/main.js')
     

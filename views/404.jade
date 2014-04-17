@@ -1,11 +1,14 @@
 extends layout
 
 block content
-  -var refreshTime = 10;
+  -var refreshTime = 3;
   p You are at the 
     strong WRONG PAGE - 404
   meta(id="redirect" http-equiv="refresh" content="#{refreshTime + 1}; url=/")
-  p. 
-    <a href="/">Click here</a> to redirect
-    or wait <span id=timer>#{refreshTime}</span> seconds
+  p 
+    a(href="/") Click here 
+    | to redirect or wait 
+    span#timer #{refreshTime}
+    |  seconds
+block localjs
   script(src="/javascripts/timer.js")
