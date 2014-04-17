@@ -1,10 +1,10 @@
 var _ = require("underscore");
 // global.items = [0,1,2,3,4,5,6];
 // global.items = ["Apricot","Banana","Cranberry","Date","Elderberry","Fig","Grape"];
-global.draggable = {
-  top: "0px",
-  left: "0px"
-};
+// global.draggable = {
+//   top: "0px",
+//   left: "0px"
+// };
 
 module.exports = function (db) {
   functions = {};
@@ -13,7 +13,7 @@ module.exports = function (db) {
     db.collection('data').findOne({}, function (err, doc) {
       if (err) throw err;
       console.dir(doc);
-      res.render('index', {items: doc.items, draggable: global.draggable});
+      res.render('index', {items: doc.items, draggable: doc.draggable});
     });
   };
 
