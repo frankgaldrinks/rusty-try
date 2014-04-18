@@ -8,8 +8,22 @@ $(document).ready(function () {
 
   socket.on('connect', function () {
     console.log("Connected to the socket");
-    socket.emit('enterroom', $("ul").data("uuid"), function (response) {
+    socket.emit('enterroom', $("#uuid").text(), function (response) {
+      $.ajax({
+        method: "post",
+        url: "/roomdata",
+        data: {
+          uuid: $("#uuid").text()
+        },
+        success: function (data) {
+          $("#ajaxload").html(data);
+          initJqueryUi();
+          console.log(data);
+        },
+        error: function (data) {
 
+        }
+      });
     });
   });
 
@@ -36,41 +50,45 @@ $(document).ready(function () {
   });
 
   //JQUERYUI STUFF ----------------------->
-  
 
-  $( "#sortable" ).sortable({
-    update: function (event, ui) {
-      var serial = $("#sortable").sortable( "toArray", { attribute: "data-item" });
+  //we run init the jquery ui stuff after the ajax loaded the data
+  var initJqueryUi = function () {
+     $( "#sortable" ).sortable({
+        update: function (event, ui) {
+          var serial = $("#sortable").sortable( "toArray", { attribute: "data-item" });
 
-      socket.emit('changeorder', {serial: serial});
-      // $.ajax({
-      //   method: "post",
-      //   url: "/sort",
-      //   data: {
-      //     serial: serial
-      //   },
-      //   success: function (data) {
-      //     console.log(data);
-      //   },
-      //   error: function (data) {
+          socket.emit('changeorder', {serial: serial});
+          // $.ajax({
+          //   method: "post",
+          //   url: "/sort",
+          //   data: {
+          //     serial: serial
+          //   },
+          //   success: function (data) {
+          //     console.log(data);
+          //   },
+          //   error: function (data) {
 
-      //   }
-      // });
-      console.log("Changed!");
-    }
-  });
+          //   }
+          // });
+          console.log("Changed!");
+        }
+      });
 
-  $("#sortable").sortable("option", "cancel", ':input,button,a');
-  // $( "#sortable" ).disableSelection();
+      $("#sortable").sortable("option", "cancel", ':input,button,a');
+      // $( "#sortable" ).disableSelection();
 
-  $draggable.draggable({
-    drag: function( event, ui ) {
-      socket.emit('changedrag', ui.position);
-    },
-    stop: function( event, ui ) {
-      socket.emit('stopdrag', ui.position);
-    }
-  });
+      $draggable.draggable({
+        drag: function( event, ui ) {
+          socket.emit('changedrag', ui.position);
+        },
+        stop: function( event, ui ) {
+          socket.emit('stopdrag', ui.position);
+        }
+      });
+  };
+
+ 
 
   //VANILLA JQUERY STUFF ----------------->
   $(document).on("click", ".removeitem", function () {

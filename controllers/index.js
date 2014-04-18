@@ -44,6 +44,18 @@ module.exports = function (db) {
     res.redirect('/place/' + req.body.room);
   };
 
+  functions.roomdata = function (req, res) {
+    var uuid = req.body.uuid;
+    
+    $data.findOne({name: uuid}, function (err, doc) {
+      if (err) throw err;
+      var renderobj = {uuid: uuid, items: doc.items, draggable: doc.draggable};
+      res.app.render('uuidajax', renderobj, function (err, html) {
+        res.send(html);
+      });
+    });
+  };
+
   return functions;
 };
 

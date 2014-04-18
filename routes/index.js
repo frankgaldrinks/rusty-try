@@ -5,5 +5,6 @@ module.exports = function(app,db){
   app.get('/redirect', indexController.redirect);
   app.get('/place/:uuid', indexController.uuid);
   app.post('/createroom', indexController.createroom);
+  app.post('/roomdata', indexController.roomdata);
   // app.post('/sort', indexController.sort);
 };
