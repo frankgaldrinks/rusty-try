@@ -13,6 +13,11 @@ $(document).ready(function () {
     });
   });
 
+  socket.on('updateusercount', function (data) {
+    console.log(data.count);
+    $("#usercount").text(data.count);
+  });
+
   socket.on('changeorderclients', function (data) {
     //we could do a $( ".selector" ).sortable( "refresh" ); instead of redoing our whole page 
     $sortable.html("");

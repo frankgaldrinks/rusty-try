@@ -4,6 +4,8 @@ block content
   .row
     .col-lg-4
       h1 Room: #{uuid}
+      h5 User count: 
+        span#usercount
       form(type="post" role="form" id="submitnew")
         .form-group.ingroup
           input.form-control(type="text" name="newitem" id="newitem")
