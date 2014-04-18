@@ -12,10 +12,10 @@ module.exports = function (db) {
   var $data = db.collection('data');
 
   functions.index = function (req, res) {
-    $data.findOne({}, function (err, doc) {
+    $data.find({},{name: true}).sort({name: 1}).toArray(function (err, docs) {
       if (err) throw err;
-      console.dir(doc);
-      res.render('index', {items: doc.items, draggable: doc.draggable});
+      console.dir(docs);
+      res.render('index', {docs: docs});
     });
   };
 

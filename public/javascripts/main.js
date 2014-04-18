@@ -14,6 +14,7 @@ $(document).ready(function () {
   });
 
   socket.on('changeorderclients', function (data) {
+    //we could do a $( ".selector" ).sortable( "refresh" ); instead of redoing our whole page 
     $sortable.html("");
     var newItems = "";
     console.log(data.serial);
@@ -30,6 +31,7 @@ $(document).ready(function () {
   });
 
   //JQUERYUI STUFF ----------------------->
+  
 
   $( "#sortable" ).sortable({
     update: function (event, ui) {
@@ -52,11 +54,16 @@ $(document).ready(function () {
       console.log("Changed!");
     }
   });
-  $( "#sortable" ).disableSelection();
+
+  $("#sortable").sortable("option", "cancel", ':input,button,a');
+  // $( "#sortable" ).disableSelection();
 
   $draggable.draggable({
     drag: function( event, ui ) {
-      socket.emit('changedrag', {dragdata: ui.position})
+      socket.emit('changedrag', ui.position);
+    },
+    stop: function( event, ui ) {
+      socket.emit('stopdrag', ui.position);
     }
   });
 
@@ -83,5 +90,41 @@ $(document).ready(function () {
         console.log(response);
       }
     });
+  });
+
+  //we might need to toggle the class .itemtext incase we refocus into an element
+  $(document).on('click', '.itemtext', function () {
+    // if ($(".newtext").is(":focus")) {
+    //   var oldVal = $(".newtext").val();
+    //   $(".newtext").parent().html("").text(oldVal);
+    // }
+    
+    var oldVal = $(this).text();
+    $(this).html("<input class='newtext' type='text' name='itemtext' data-oldval='" + oldVal + "'' />");
+    // $(".dragarea").after("<input class='newtext' type='text' name='itemtext' />");
+    $(this).find('.newtext').val(oldVal);
+    $(this).find('.newtext').focus();
+
+  });
+
+  $(document).on('blur', '.newtext', function () {
+    var oldVal = $(this).data("oldval");
+    var newVal = $(this).val();
+
+    console.log("blurred");
+    console.log("Old val: " + oldVal);
+    console.log("New Val: " + newVal);
+    if (!$(".newtext").is(":focus")) {
+      $(this).parent().html("").text(newVal);
+    }
+    
+    if (oldVal !== newVal) {
+
+      socket.emit("changeitemname", {oldName: oldVal, newName: newVal}, function (response) {
+
+      });
+    }
+    $(this).parent().html("").text(newVal);
+    
   });
 });
