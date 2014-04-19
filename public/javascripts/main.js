@@ -48,13 +48,17 @@ $(document).ready(function () {
     $draggable.css({"top": data.top, "left": data.left});
   });
 
+  socket.on('roomdeleted', function (data) {
+    $(".col-lg-4").html(data.message);
+  });
+
   //JQUERYUI STUFF ----------------------->
 
   //we run init the jquery ui stuff after the ajax loaded the data
   var initJquery = function () {
     $sortable = $("#sortable");
     $draggable = $("#draggable");
-    
+
     $( "#sortable" ).sortable({
       update: function (event, ui) {
         var serial = $("#sortable").sortable( "toArray", { attribute: "data-item" });

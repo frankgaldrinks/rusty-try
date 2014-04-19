@@ -85,3 +85,20 @@ li span {
 .newbutt, .newroom {
   display: inline-block;
 }
+
+#listrooms {
+  margin: 0;
+  padding: 0;
+}
+
+#listrooms li {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+}
+
+.removeroom {
+  color: red;
+  margin-left: 25px;
+  cursor: pointer;
+}

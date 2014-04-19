@@ -3,8 +3,11 @@ extends layout
 block content
   .row
     .col-lg-4
+      a(href='/') Home
       h1 Room: 
         span#uuid #{uuid}
       h5 User count: 
         span#usercount Loading...
       #ajaxload
+block localjs
+  script(src='/javascripts/main.js')

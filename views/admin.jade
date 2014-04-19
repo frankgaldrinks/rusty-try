@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h2 Admin Page
+  h3 Rooms
+  ul#listrooms
+    each doc in docs
+      li
+        a(href="/place/#{doc.name}") #{doc.name}
+        span.removeroom.glyphicon.glyphicon-remove
+block localjs
+  script(src='/javascripts/admin.js')

@@ -7,7 +7,7 @@ defaultdraggable = {
   left: "0px"
 };
 
-module.exports = function (db) {
+module.exports = function (db, io) {
   functions = {};
   var $data = db.collection('data');
 
@@ -16,6 +16,29 @@ module.exports = function (db) {
       if (err) throw err;
       console.dir(docs);
       res.render('index', {docs: docs});
+    });
+  };
+
+  functions.admin = function (req, res) {
+    $data.find({},{name: true}).sort({name: 1}).toArray(function (err, docs) {
+      if (err) throw err;
+      console.dir(docs);
+      res.render('admin', {docs: docs});
+    });
+  };
+
+  //use the io device and then send a remove/ban to people in that room
+
+  functions.removeroom = function (req, res) {
+    var room = req.body.room;
+
+    $data.remove({name: room}, function (err, removed) {
+      if (err) throw err;
+      console.log(removed);
+      res.send("success");
+      var message = "<p>This room has been deleted</p>";
+      message += "<meta id='redirect' http-equiv='refresh' content='3; url=/' />"
+      io.sockets.in(room).emit('roomdeleted', { message: message } );
     });
   };
 

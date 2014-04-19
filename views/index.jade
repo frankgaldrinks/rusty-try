@@ -10,7 +10,7 @@ block content
           input.form-control(type="text" name="room" id="room")
           input(type="submit" class="btn btn-success newroom" value="Go To")
       h3 Rooms
-      ul
+      ul#listrooms
         each doc in docs
           li
             a(href="/place/#{doc.name}") #{doc.name}
